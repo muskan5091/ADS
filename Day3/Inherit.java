@@ -1,4 +1,4 @@
-public class Q11Inherit{
+public class Inherit{
     public static void main(String[] args){
         child c = new child();
         c.details();
