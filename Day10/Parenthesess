@@ -1,0 +1,55 @@
+class Solution {
+    List<String> pairs;
+    public List<String> generateParenthesis(int n) {
+        pairs = new ArrayList<>();
+        generate(0, 0, n, new StringBuilder());
+        return pairs;
+    }
+
+    public void generate(int open, int closed, int n, StringBuilder str){
+
+        if(n*2 == str.length()){
+            pairs.add(str.toString());
+            return;
+        }
+
+        if(open < n){
+            str.append("(");
+            generate(open+1, closed, n, str);
+            str.deleteCharAt(str.length()-1);
+        }
+
+        if(closed < open){
+            str.append(")");
+            generate(open, closed+1, n, str);
+            str.deleteCharAt(str.length()-1);
+        }
+    }
+}
+// class Solution {
+//     public List<String> generateParenthesis(int n) {
+//         List<String> result = new ArrayList<>();
+//         backtrack(result, "", 0, 0, n);
+//         return result;
+//     }
+
+//     private void backtrack(List<String> result, String curr,
+//                            int open, int close, int n) {
+
+//         // when string length = 2*n → valid combination
+//         if (curr.length() == 2 * n) {
+//             result.add(curr);
+//             return;
+//         }
+
+//         // add "(" if we still can
+//         if (open < n) {
+//             backtrack(result, curr + "(", open + 1, close, n);
+//         }
+
+//         // add ")" only if it won't break validity
+//         if (close < open) {
+//             backtrack(result, curr + ")", open, close + 1, n);
+//         }
+//     }
+// }
